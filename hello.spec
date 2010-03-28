@@ -1,6 +1,6 @@
 Name:           hello
-Version:        2.4
-Release:        3%{?dist}
+Version:        2.5
+Release:        1%{?dist}
 Summary:        Prints a Familiar, Friendly Greeting
 Group:          Development/Tools
 # Parts of the documentation are under GFDL, BSD, and Public Domain
@@ -64,6 +64,9 @@ fi
 
 
 %changelog
+* Sun Mar 28 2010 Conrad Meyer <konrad@tylerc.org> - 2.5-1
+- Bump version.
+
 * Fri Jul 24 2009 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.4-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_12_Mass_Rebuild
 
