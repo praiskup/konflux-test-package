@@ -1,5 +1,5 @@
 Name:           hello
-Version:        2.5
+Version:        2.6
 Release:        1%{?dist}
 Summary:        Prints a Familiar, Friendly Greeting
 Group:          Development/Tools
@@ -64,6 +64,9 @@ fi
 
 
 %changelog
+* Wed Jan 12 2011 Conrad Meyer <konrad@tylerc.org> - 2.6-1
+- Bump to 2.6.
+
 * Sun Mar 28 2010 Conrad Meyer <konrad@tylerc.org> - 2.5-1
 - Bump version.
 
