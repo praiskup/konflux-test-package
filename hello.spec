@@ -1,6 +1,6 @@
 Name:           hello
 Version:        2.6
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Prints a Familiar, Friendly Greeting
 Group:          Development/Tools
 # Parts of the documentation are under GFDL, BSD, and Public Domain
@@ -64,6 +64,9 @@ fi
 
 
 %changelog
+* Fri Jan 13 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.6-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_17_Mass_Rebuild
+
 * Wed Feb 09 2011 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.6-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_15_Mass_Rebuild
 
