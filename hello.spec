@@ -1,69 +1,72 @@
 Name:           hello
-Version:        2.6
+Version:        2.10
 Release:        3%{?dist}
-Summary:        Prints a Familiar, Friendly Greeting
-Group:          Development/Tools
-# Parts of the documentation are under GFDL, BSD, and Public Domain
-# *All* code is GPLv3+.
-License:        GPLv3+ and GFDL and BSD and Public Domain
-URL:            http://www.gnu.org/software/hello/
-Source0:        http://ftp.gnu.org/gnu/hello/hello-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Summary:        Prints a familiar, friendly greeting
+# All code is GPLv3+.
+# Parts of the documentation are under GFDL
+License:        GPLv3+ and GFDL
+URL:            https://www.gnu.org/software/hello/
+Source0:        https://ftp.gnu.org/gnu/hello/hello-%{version}.tar.gz
+Source1:        https://ftp.gnu.org/gnu/hello/hello-%{version}.tar.gz.sig
+Source2:        https://ftp.gnu.org/gnu/gnu-keyring.gpg
 
-BuildRequires: gettext
-Requires(post): info
-Requires(preun): info
-
+BuildRequires:  gcc
+BuildRequires:  gnupg2
+Recommends:     info
+Provides:       bundled(gnulib)
 
 %description
-Hello prints a friendly greeting. It also serves as a sample GNU
-package, showing practices that may be useful for GNU projects.
+The GNU Hello program produces a familiar, friendly greeting.
+Yes, this is another implementation of the classic program that
+prints “Hello, world!” when you run it.
+
+However, unlike the minimal version often seen, GNU Hello processes
+its argument list to modify its behavior, supports greetings in many
+languages, and so on. The primary purpose of GNU Hello is to
+demonstrate how to write other programs that do these things; it
+serves as a model for GNU coding standards and GNU maintainer
+practices.
 
 
 %prep
+%{gpgverify} --keyring='%{SOURCE2}' --signature='%{SOURCE1}' --data='%{SOURCE0}'
 %setup -q
 
 
 %build
 %configure
-make %{?_smp_mflags}
+%make_build
 
 
 %install
-rm -rf $RPM_BUILD_ROOT
-make install DESTDIR=$RPM_BUILD_ROOT
-rm -f $RPM_BUILD_ROOT%{_infodir}/dir
+%make_install
+rm -f %{buildroot}%{_infodir}/dir
 %find_lang hello
 
 
 %check
-cd tests
-make check-TESTS
-
-
-%clean
-rm -rf $RPM_BUILD_ROOT
-
-
-%post
-/sbin/install-info %{_infodir}/%{name}.info %{_infodir}/dir || :
-
-
-%preun
-if [ $1 = 0 ] ; then
-  /sbin/install-info --delete %{_infodir}/%{name}.info %{_infodir}/dir || :
-fi
+make check
 
 
 %files -f hello.lang
-%defattr(-,root,root,-)
-%doc COPYING
+%license COPYING
 %{_mandir}/man1/hello.1*
 %{_bindir}/hello
 %{_infodir}/hello.info*
 
 
 %changelog
+* Wed Apr  1 2020 Jens Petersen <petersen@redhat.com> - 2.10-3
+- packaging fixes (#1810897)
+- use https urls
+- use make_build, make_install, buildroot, and license macros
+
+* Fri Mar  6 2020 Jens Petersen <petersen@redhat.com> - 2.10-2
+- add gpgverify of source
+
+* Thu Mar  5 2020 Jens Petersen <petersen@redhat.com> - 2.10-1
+- update to 2.10
+
 * Fri Jan 13 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.6-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_17_Mass_Rebuild
 
