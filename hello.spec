@@ -12,6 +12,7 @@ Source2:        https://ftp.gnu.org/gnu/gnu-keyring.gpg
 
 BuildRequires:  gcc
 BuildRequires:  gnupg2
+BuildRequires: make
 Recommends:     info
 Provides:       bundled(gnulib)
 
