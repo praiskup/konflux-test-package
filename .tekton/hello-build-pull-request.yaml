@@ -28,6 +28,8 @@ spec:
       value: "{{ revision }}"
     - name: target-branch
       value: "{{ target_branch }}"
+    - name: hermetic
+      value: false
   pipelineRef:
     resolver: git
     params:
