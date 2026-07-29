@@ -27,16 +27,16 @@ spec:
       value: "{{ revision }}"
     - name: target-branch
       value: "{{ target_branch }}"
-  pipelineRef:
-    resolver: git
-    params:
-      - name: url
-        value: "https://github.com/mshaposhnik/rpmbuild-pipeline.git"
-      - name: revision
-        value: main
-      - name: pathInRepo
-        value: pipeline/build-rpm-package.yaml
-  workspaces:
-    - name: git-auth
-      secret:
-        secretName: '{{ git_auth_secret }}'
+   pipelineRef:
+     resolver: git
+     params:
+       - name: url
+         value: "https://github.com/mshaposhnik/rpmbuild-pipeline.git"
+       - name: revision
+         value: main
+       - name: pathInRepo
+         value: pipeline/build-rpm-package.yaml
+   workspaces:
+     - name: git-auth
+       secret:
+         secretName: '{{ git_auth_secret }}'
